@@ -18,8 +18,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:text="猜"
+            android:onClick="guess"
             />
         <EditText
+            android:id="@+id/input"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -40,22 +42,26 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="b1"
+            android:text="New"
+            android:onClick="newGame"
             />
         <Button
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="b2"
+            android:text="Setting"
+            android:onClick="setting"
             />
         <Button
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="b3"
+            android:text="Exit"
+            android:onClick="exit"
             />
     </LinearLayout>
     <TextView
+        android:id="@+id/log"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/top"
