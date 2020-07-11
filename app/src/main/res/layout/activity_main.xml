@@ -42,6 +42,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:textAllCaps="false"
             android:text="New"
             android:onClick="newGame"
             />
@@ -50,6 +51,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="Setting"
+            android:textAllCaps="false"
             android:onClick="setting"
             />
         <Button
@@ -57,6 +59,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="Exit"
+            android:textAllCaps="false"
             android:onClick="exit"
             />
     </LinearLayout>
