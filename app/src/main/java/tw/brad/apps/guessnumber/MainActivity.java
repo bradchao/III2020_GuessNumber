@@ -3,6 +3,7 @@ package tw.brad.apps.guessnumber;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private String answer;
     private EditText input;
     private TextView log;
+    private int counter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,16 +29,28 @@ public class MainActivity extends AppCompatActivity {
         input = findViewById(R.id.input);
         log = findViewById(R.id.log);
 
-        newGame(null);
+        initGame();
     }
 
     public void guess(View view) {
+        counter++;
         String strInput = input.getText().toString();
         String result = checkAB(strInput);
-        showMessage(strInput + "=>" + result);
-        log.append(strInput + "=>" + result + "\n");
+        log.append(counter + ":" + strInput + " => " + result + "\n");
 
         input.setText("");
+
+        if (result.equals("3A0B")){
+            // WINNER
+            showMessage("恭喜老爺, 賀喜夫人");
+            initGame();
+        }else if (counter == 3){
+            // LOSER
+            showMessage("Loser: " + answer);
+            initGame();
+        }else{
+            showMessage(strInput + "=>" + result);
+        }
 
     }
 
@@ -66,7 +80,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void newGame(View view) {
+        new AlertDialog.Builder(this)
+                .setMessage("New Game?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        initGame();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .setCancelable(false)
+                .create()
+                .show();
+    }
+
+    private void initGame(){
         answer = createAnswer(3);
+        counter = 0;
+        log.setText("");
         Log.v("bradlog", answer);
     }
 
