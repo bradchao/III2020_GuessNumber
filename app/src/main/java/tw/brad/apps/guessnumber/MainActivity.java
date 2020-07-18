@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Message");
         builder.setMessage(mesg);
+        builder.setPositiveButton("OK",null);
+        //builder.setCancelable(false);
 
         alertDialog = builder.create();
         alertDialog.show();
