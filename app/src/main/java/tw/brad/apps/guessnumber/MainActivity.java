@@ -1,11 +1,13 @@
 package tw.brad.apps.guessnumber;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Collections;
@@ -15,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private long lastTime = 0;
     private String answer;
     private EditText input;
+    private TextView log;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,13 +25,30 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         input = findViewById(R.id.input);
+        log = findViewById(R.id.log);
 
+        newGame(null);
     }
 
     public void guess(View view) {
         String strInput = input.getText().toString();
         String result = checkAB(strInput);
-        Log.v("bradlog", strInput + "=>" + result);
+        showMessage(strInput + "=>" + result);
+        log.append(strInput + "=>" + result + "\n");
+
+        input.setText("");
+
+    }
+
+    private void showMessage(String mesg){
+        AlertDialog alertDialog = null;
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Message");
+        builder.setMessage(mesg);
+
+        alertDialog = builder.create();
+        alertDialog.show();
     }
 
     private String checkAB(String guess){
