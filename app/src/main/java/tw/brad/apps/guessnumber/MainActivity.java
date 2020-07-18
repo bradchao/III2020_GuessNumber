@@ -7,8 +7,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import java.util.Collections;
+import java.util.LinkedList;
+
 public class MainActivity extends AppCompatActivity {
     private long lastTime = 0;
+    private String answer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,9 +24,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void newGame(View view) {
+        answer = createAnswer(4);
+        Log.v("bradlog", answer);
     }
 
     public void setting(View view) {
+    }
+
+    private String createAnswer(int d){
+        LinkedList<Integer> list = new LinkedList<>();
+        for (int i=0; i<10; i++){
+            list.add(i);
+        }
+        Collections.shuffle(list);
+        String ret = "";
+        for (int i=0; i<d; i++){
+            ret +=  list.get(i);
+        }
+
+        return ret;
     }
 
     public void exit(View view) {
