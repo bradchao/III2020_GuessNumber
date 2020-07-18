@@ -102,6 +102,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setting(View view) {
+        AlertDialog alertDialog = null;
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("設定猜幾碼?");
+        builder.setItems(new String[]{"2", "3", "4"}, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Log.v("bradlog", "i = " + i);
+            }
+        });
+
+        alertDialog = builder.create();
+        alertDialog.show();
     }
 
     private String createAnswer(int d){
