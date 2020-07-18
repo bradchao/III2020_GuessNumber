@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText input;
     private TextView log;
     private int counter;
+    private int dig = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     public void guess(View view) {
         counter++;
         String strInput = input.getText().toString();
+        
         String result = checkAB(strInput);
         log.append(counter + ":" + strInput + " => " + result + "\n");
 
@@ -95,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initGame(){
-        answer = createAnswer(3);
+        answer = createAnswer(dig);
         counter = 0;
         log.setText("");
         Log.v("bradlog", answer);
@@ -106,12 +108,23 @@ public class MainActivity extends AppCompatActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("設定猜幾碼?");
-        builder.setItems(new String[]{"2", "3", "4"}, new DialogInterface.OnClickListener() {
+//        builder.setItems(new String[]{"2", "3", "4"}, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                Log.v("bradlog", "i = " + i);
+//            }
+//        });
+
+        builder.setSingleChoiceItems(new String[]{"2", "3", "4"}, dig-2, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Log.v("bradlog", "i = " + i);
+                dig = i+2;
+                initGame();
             }
         });
+
+        builder.setPositiveButton("OK", null);
+        builder.setCancelable(false);
 
         alertDialog = builder.create();
         alertDialog.show();
